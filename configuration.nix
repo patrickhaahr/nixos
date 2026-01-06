@@ -22,7 +22,16 @@
     ${pkgs.kbd}/bin/loadkeys dk
    '';
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ "ph" "patrickhaahr" ];
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   services.xserver = {
@@ -54,6 +63,7 @@
   programs.hyprland.enable = true;
   programs.fish.enable = true;
   programs.adb.enable = true;
+  programs.ssh.startAgent = true;
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "android-studio-stable"

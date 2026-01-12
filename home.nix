@@ -99,5 +99,8 @@ in
     fd
     wl-clipboard
     bluetui
+    lazygit
+    fzf
+    yazi
   ] ++ builtins.attrValues myScripts;
 }

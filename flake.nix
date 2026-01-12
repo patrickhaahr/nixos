@@ -27,7 +27,7 @@
               users.ph = import ./home.nix;
               backupFileExtension = "backup";
               extraSpecialArgs = {
-                inherit opencodePkg;
+                inherit opencodePkg self;
               };
             };
           }

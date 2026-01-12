@@ -1,7 +1,8 @@
-{ config, pkgs, opencodePkg, ... }:
+{ config, pkgs, opencodePkg, self, ... }:
 
 let
-  myScripts = pkgs.callPackage ./pkgs/scripts { };
+  myScripts = import "${self}/pkgs/scripts" { inherit (pkgs) writeShellScriptBin; };
+  _ = builtins.trace "myScripts type: ${builtins.typeOf myScripts}" null;
   dotfiles = "${config.home.homeDirectory}/nixos/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {

@@ -1,6 +1,7 @@
 { config, pkgs, opencodePkg, ... }:
 
 let
+  myScripts = pkgs.callPackage ./pkgs/scripts { };
   dotfiles = "${config.home.homeDirectory}/nixos/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
@@ -95,6 +96,7 @@ in
     nodejs
     python3
     fd
-    android-studio
-  ];
+    wl-clipboard
+    bluetui
+  ] ++ builtins.attrValues myScripts;
 }
